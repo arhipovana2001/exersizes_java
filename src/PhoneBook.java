@@ -46,7 +46,7 @@ public class PhoneBook {
         if (toUpdate == -1){
             throw new RecordNotFound("Запись не найдена");
         } else {
-            // обновить запис
+            // обновить запись
             if ((record.phoneNumber == null || record.phoneNumber.length()==0) &&
                     (record.name == null || record.name.length()==0)){
                 throw new RecordNotValid("не заполнено поле name и/или поле phoneNumber");
