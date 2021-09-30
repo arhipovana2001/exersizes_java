@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PhoneBook {
     private ArrayList<Record> records = new ArrayList<>();
@@ -14,7 +15,7 @@ public class PhoneBook {
         int toUpdate = -1;
 
         for(int i = 0; i< records.size(); i++) {
-            if (records.get(i).phoneNumber == record.phoneNumber){
+            if (Objects.equals(records.get(i).phoneNumber, record.phoneNumber)){
                 // найдено значение с таким же номером телефона
                 toUpdate = i;
             }
@@ -47,14 +48,14 @@ public class PhoneBook {
             throw new RecordNotFound("Запись не найдена");
         } else {
             // обновить запись
-            if ((record.phoneNumber == null || record.phoneNumber.length()==0) &&
-                    (record.name == null || record.name.length()==0)){
+            if ((record.phoneNumber == null || record.phoneNumber.length() == 0) &&
+                    (record.name == null || record.name.length() == 0)) {
                 throw new RecordNotValid("не заполнено поле name и/или поле phoneNumber");
-            }else {
+            } else {
                 records.set(toUpdate, record);
             }
-            }
         }
+    }
 
 
     public void deleteRecord(long id){
