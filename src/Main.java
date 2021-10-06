@@ -1,31 +1,34 @@
-public class Main {
-    public static void main(String[] args) throws RecordNotValid, PhoneNumberAlreadyExists {
-        Record r1 = new Record("9876", "nastya");
-        Record r2 = new Record("9876", "anya");
-        Record r3 = new Record();
-        Record r4 = new Record();
-        PhoneBook book = new PhoneBook();
+import java.io.*;
+import java.util.*;
 
-        System.out.println("-------------------");
-        book.createRecord(r1);
+public class Main {
+    public static void main(String[] args) throws IOException, AccountAlreadyExistsException, AccountBlockedException, WrongCredentialsException {
+
+        Account a = new Account("Артемов", "Егор",
+                "Сергеевич", "09.01.2002", "egor@mail.ru", "pass00");
+        FileAccountManager f = new FileAccountManager();
+        f.register(a);
         try {
-            book.createRecord(r2);
-        }catch (PhoneNumberAlreadyExists e){
+            f.register(a);
+        } catch (AccountAlreadyExistsException e) {
             System.out.println(e.getMessage());
         }
-        book.getInfo();
-        System.out.println("-------------------");
-        book.createRecord(r3);
         try {
-            book.updateRecord(r3);
-        }catch (RecordNotValid e){
+            f.login("egor@mail.ru", "pass0077");
+        } catch (WrongCredentialsException e) {
             System.out.println(e.getMessage());
         }
-        //book.updateRecord(r4);
-        System.out.println("-------------------");
-        book.deleteRecord(4);
-        System.out.println("-------------------");
+
+        System.out.println("-----------------");
+
+        f.login("egor@mail.ru", "pass00");
+
+
+        f.removeAccount("egor@mail.ru", "pass00");
+
 
     }
+
 }
+
 
