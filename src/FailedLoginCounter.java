@@ -7,7 +7,7 @@ public class FailedLoginCounter {
 
 
     // Сделать конструктор класса (конструктор по-умолчанию) приватным
-    FailedLoginCounter() {
+    private FailedLoginCounter() {
     }
 
     // Объявить статический создающий метод, который будет использоваться для получения одиночки:
@@ -27,8 +27,8 @@ public class FailedLoginCounter {
     }
 
     public void plus(Account a) {
-        //System.out.println("method plus before: " + a);
+        System.out.println("method plus before: " + a);
         a.countPlus();
-        //System.out.println("method plus after: " + a);
+        System.out.println("method plus after: " + a);
     }
 }

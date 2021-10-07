@@ -1,4 +1,4 @@
-public class AccountAlreadyExistsException extends RuntimeException{
+public class AccountAlreadyExistsException extends Exception{
     public AccountAlreadyExistsException(String message) {
         super(message);
     }

@@ -7,8 +7,10 @@ import java.util.Objects;
 public class FileAccountManager implements AccountManager {
 
     List<Account> accounts = new ArrayList<Account>();
-    FileService file = new FileService();
-    FailedLoginCounter counter = new FailedLoginCounter();
+    FileService file = FileService.getInstance();
+    FailedLoginCounter counter = FailedLoginCounter.getInstance();
+
+
 
 
     public void register(Account account) throws IOException, AccountAlreadyExistsException {
@@ -37,7 +39,6 @@ public class FileAccountManager implements AccountManager {
     }
 
     public Account login(String email, String password) throws IOException, AccountBlockedException, WrongCredentialsException {
-        Account ac = new Account();
         /*
          * Метод возвращает Account, если для email+пароль есть
          * подходящая запись в базе и аккаунт не заблокирован.
@@ -63,21 +64,22 @@ public class FileAccountManager implements AccountManager {
             throw new WrongCredentialsException("неверно введены email и/или пароль");
         } else {
             // есть запись с таким емайлом
-            if (Objects.equals(accounts.get(index).getPassword(), password) && !accounts.get(index).getBlocked() && accounts.get(index).getCount() < 5) {
+            if (Objects.equals(accounts.get(index).getPassword(), password) && !accounts.get(index).getBlocked() &&
+                    accounts.get(index).getCount() < 5) {
                 // пароль верный, аккаунт не заблокирован
                 System.out.println("Метод логин сработал верно:" + accounts.get(index));
                 return accounts.get(index);
-            } else if (Objects.equals(accounts.get(index).getPassword(), password) && accounts.get(index).getCount() == 5) {
+            } else if (Objects.equals(accounts.get(index).getPassword(), password) && accounts.get(index).getCount() >= 5) {
                 // email и пароль верны, но аккаунт заблокирован
                 throw new AccountBlockedException("аккаунт заблокирован");
             } else if (!Objects.equals(accounts.get(index).getPassword(), password)) {
                 // неверный пароль
                 counter.plus(accounts.get(index));
-                if (accounts.get(index).getCount() == 5) {
+                if (accounts.get(index).getCount() >= 5) {
                     accounts.get(index).setBlocked();
                 }
                 file.csvWriter(accounts);
-                throw new WrongCredentialsException("неверно введены email и/или пароль");
+                throw new WrongCredentialsException("1неверно введены email и/или пароль");
             }
         }
 
