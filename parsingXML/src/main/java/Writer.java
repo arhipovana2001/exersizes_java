@@ -1,18 +1,15 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class FileWriter {
+public class Writer {
 
-    public void writeFile()
-    File file = new File("Example.txt");
+    public void fileWrite(String filepath, String text) throws IOException {
+        File file = new File(filepath);
+        FileWriter writer = new FileWriter(file);
+        writer.write(text);
+        writer.flush();
+        writer.close();
+    }
 
-    // Создание файла
-      file.createNewFile();
-
-    // Создание объекта FileWriter
-    FileWriter writer = new FileWriter(file);
-
-    // Запись содержимого в файл
-      writer.write("Это простой пример,\n в котором мы осуществляем\n с помощью языка Java\n запись в файл\n и чтение из файла\n");
-      writer.flush();
-      writer.close();
 }

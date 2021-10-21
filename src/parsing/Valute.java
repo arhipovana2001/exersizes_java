@@ -1,18 +1,31 @@
 package parsing;
 
-public class Value {
+public class Valute {
     private String numCode;
     private String charCode;
-    private String nominal;
+    private int nominal;
     private String name;
-    private String value;
+    private double value;
 
-    public Value(String numCode, String charCode, String nominal, String name, String value){
+    public Valute(String numCode, String charCode, int nominal, String name, double value){
         this.numCode = numCode;
         this.charCode = charCode;
         this.nominal = nominal;
         this.name = name;
         this.value = value;
+    }
+
+    public Valute(){
+
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        //res += "--------------------\n";
+        //res += "Charcode: " + this.charCode + "\n";
+        res += this.nominal + " " + this.name + " = " + this.value + " российских рубля." + "\n";
+        return res;
     }
 
     public String getNumCode() {
@@ -31,11 +44,11 @@ public class Value {
         this.charCode = charCode;
     }
 
-    public String getNominal() {
+    public int getNominal() {
         return nominal;
     }
 
-    public void setNominal(String nominal) {
+    public void setNominal(int nominal) {
         this.nominal = nominal;
     }
 
@@ -47,11 +60,11 @@ public class Value {
         this.name = name;
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
 }
