@@ -120,3 +120,10 @@ public class FileAccountManager implements AccountManager {
         }
     }
 }
+
+// подключение БД после того, как скачали
+// cd
+// cd .\my_sql...
+// cd bin
+// .\mysql --user=root
+//
