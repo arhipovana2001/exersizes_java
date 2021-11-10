@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Valute {
     private static List<String> charCodes = new ArrayList<>();
@@ -25,7 +26,7 @@ public class Valute {
     public static void findValute(List<Valute> valutes, String charCode) {
 
         for (Valute valute : valutes) {
-            if (valute.getCharCode().equals(charCode)) {
+            if (valute.getCharCode().equals(charCode.toUpperCase(Locale.ROOT))) {
                 System.out.println(valute);
             }
         }
